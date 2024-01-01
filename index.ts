@@ -5,7 +5,7 @@ import cors from "cors";
 import passport from "passport"
 import crypto from "crypto"
 import MongoStore from "connect-mongo";
-const routes = require("./routes")
+const routes = require("./routes");
 interface CustomSession extends session.Session{
     views?: number;
 };
