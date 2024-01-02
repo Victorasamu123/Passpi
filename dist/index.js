@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const express_session_1 = __importDefault(require("express-session"));
 const cors_1 = __importDefault(require("cors"));
 const connect_mongo_1 = __importDefault(require("connect-mongo"));
-const routes = require("./routes");
+const index_1 = require("./routes/index");
 ;
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
@@ -31,7 +31,7 @@ app.use((0, express_session_1.default)({
     },
 }));
 require("./config/passport");
-app.use(routes);
+app.use(index_1.router);
 app.get("/", (req, res) => {
     if (!req.session.views) {
         req.session.views = req.session.views + 1;

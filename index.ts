@@ -5,7 +5,7 @@ import cors from "cors";
 import passport from "passport"
 import crypto from "crypto"
 import MongoStore from "connect-mongo";
-const routes = require("./routes");
+import {router} from "./routes/index";
 interface CustomSession extends session.Session{
     views?: number;
 };
@@ -48,7 +48,7 @@ app.use(session({
 
 require("./config/passport")
 
-app.use(routes);
+app.use(router);
 
 
 app.get("/", (req :Request<{session: SessionData}>,res:Response)=>{
