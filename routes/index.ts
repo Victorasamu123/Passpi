@@ -13,6 +13,9 @@ router.post("/signup",(req:Request,res:Response,next:NextFunction)=>{});
 router.post("/",(req:Request,res:Response,next:NextFunction)=>{
     // res.send
 });
+router.post("/hello",(req:Request,res:Response,next:NextFunction)=>{
+    // res.send
+});
 
 
 
