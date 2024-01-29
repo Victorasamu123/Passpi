@@ -1,7 +1,7 @@
 import passport from "passport";
 import localStrategy from "passport-local";
 import {User} from "./database"
-import { validPassword } from "../lib/passwordUtils";
+import { validPassword,genPassword } from "../lib/passwordUtils";
 const LocalStrategy = localStrategy.Strategy;
 
 const customFields = {
@@ -16,7 +16,7 @@ const verifyCallBack = (username: any, password:any, done:any) => {
         if(!user){return done (null, false)}
 
         //function defined 
-        const isValid = validPassword(password, user.hash, user.salt) as unknown as boolean 
+        const isValid = validPassword(password, user.hash, user.salt) as unknown as boolean
 
         if(isValid){
             return done(null, user);
