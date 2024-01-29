@@ -8,7 +8,9 @@ export const router = express.Router();
 
 // post routess //
 
-router.post("/signin",(req:Request,res:Response,next:NextFunction)=>{});
+router.post("/signin",passport.authenticate("local"),(req:Request,res:Response,next:NextFunction)=>{
+
+});
 
 router.post("/signup",(req:Request,res:Response,next:NextFunction)=>{});
 
@@ -67,7 +69,7 @@ router.get('/logout', (req:Request, res:Response, next:NextFunction) => {
             } else {
               res.redirect('/'); // Redirect to the homepage or login page
             }
-          });
+          }); 
         }
       });
     res.redirect('/protected-route');

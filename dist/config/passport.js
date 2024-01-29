@@ -15,30 +15,27 @@ const customFields = {
 const verifyCallBack = (username, password, done) => {
     database_1.User.findOne({ username: username }).then((user) => {
         if (!user) {
-            return cb(null, false);
+            return done(null, false);
         }
         //function defined 
         const isValid = (0, passwordUtils_1.validPassword)(password, user.hash, user.salt);
         if (isValid) {
-            return cb(null, user);
+            return done(null, user);
         }
         else {
-            return cb(null, false);
+            return done(null, false);
         }
     }).catch((err) => {
-        cb(err);
+        done(err);
     });
 };
-// const Strategy = new LocalStrategy()
-passport_1.default.use(new LocalStrategy(function (username, password, cb) {
-    database_1.User.findOne({ username: username }).then((user) => {
-        if (!user) {
-            return cb(null, false);
-        }
-        //function defined 
-        const isValid = (0, passwordUtils_1.validPassword)(password, user.hash, user.salt);
-    });
-}));
-function cb(arg0, arg1) {
-    throw new Error("Function not implemented.");
-}
+const Strategy = new LocalStrategy(customFields, verifyCallBack);
+passport_1.default.use(Strategy);
+passport_1.default.serializeUser((user, done) => {
+    done(null, user);
+});
+passport_1.default.deserializeUser((userId, done) => {
+    database_1.User.findById(userId).then((user) => {
+        done(null, user);
+    }).catch(err => done(err));
+});

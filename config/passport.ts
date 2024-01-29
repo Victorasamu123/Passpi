@@ -9,43 +9,37 @@ const customFields = {
     passwordField:"pw"
 };
 
-const verifyCallBack = (username:any, password:any, done:any) => {
+const verifyCallBack = (username: any, password:any, done:any) => {
     
-    User.findOne({username:username}).then((user:any)=>{
+    User.findOne({username:username}).then((user)=>{
 
-        if(!user){return cb(null, false)}
+        if(!user){return done (null, false)}
 
         //function defined 
-        const isValid = validPassword(password,user.hash, user.salt) {
-
-        };
+        const isValid = validPassword(password, user.hash, user.salt) as unknown as boolean 
 
         if(isValid){
-            return cb(null, user);
+            return done(null, user);
         } else {
-            return cb(null , false);
+            return done(null , false);
         }
 
     }).catch((err)=>{
-        cb(err);
-    })
+        done(err);
+    });
 
 } 
 
-// const Strategy = new LocalStrategy()
+const Strategy = new LocalStrategy(customFields, verifyCallBack);
 
-// passport.use(new LocalStrategy(
-//     function(username, password, cb){
-//      User.findOne({username:username}).then((user)=>{
+passport.use(Strategy);
 
-//             if(!user){return cb(null, false)}
+passport.serializeUser((user,done)=>{
+    done(null, user);
+});
 
-//             //function defined 
-//             const isValid = validPassword(password,user.hash, user.salt);
-//         })
-//     }
-// ))
-
-function cb(arg0: null, arg1: boolean): any {
-    throw new Error("Function not implemented.");
-}
+passport.deserializeUser((userId,done)=>{
+    User.findById(userId).then((user)=>{
+    done(null, user); 
+    }).catch(err=> done(err))
+});
