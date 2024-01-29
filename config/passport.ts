@@ -16,7 +16,9 @@ const verifyCallBack = (username:any, password:any, done:any) => {
         if(!user){return cb(null, false)}
 
         //function defined 
-        const isValid = validPassword(password,user.hash, user.salt);
+        const isValid = validPassword(password,user.hash, user.salt) {
+
+        };
 
         if(isValid){
             return cb(null, user);
@@ -32,17 +34,17 @@ const verifyCallBack = (username:any, password:any, done:any) => {
 
 // const Strategy = new LocalStrategy()
 
-passport.use(new LocalStrategy(
-    function(username, password, cb){
-     User.findOne({username:username}).then((user)=>{
+// passport.use(new LocalStrategy(
+//     function(username, password, cb){
+//      User.findOne({username:username}).then((user)=>{
 
-            if(!user){return cb(null, false)}
+//             if(!user){return cb(null, false)}
 
-            //function defined 
-            const isValid = validPassword(password,user.hash, user.salt);
-        })
-    }
-))
+//             //function defined 
+//             const isValid = validPassword(password,user.hash, user.salt);
+//         })
+//     }
+// ))
 
 function cb(arg0: null, arg1: boolean): any {
     throw new Error("Function not implemented.");
