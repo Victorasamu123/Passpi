@@ -46,7 +46,10 @@ app.use(session({
     
 }));
 
-require("./config/passport")
+require("./config/passport");
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(router);
 
