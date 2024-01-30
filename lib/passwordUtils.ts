@@ -17,4 +17,4 @@ export function genPassword(password:string){
 
 // module.exports.validPassword = validPassword;
 
-// module.exports.genPassword = genPassword;
+// module.exports.genPassword = genPassword; 
