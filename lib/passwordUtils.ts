@@ -11,10 +11,6 @@ export function genPassword(password:string){
 }
 
  export function validPassword (password:string, hash:string, salt:string){
-    let hashVerify = crypto.pbkdf2Sync(password,salt,10000,64, "sha512").toString("hex")
+    let hashVerify = crypto.pbkdf2Sync(password,salt,10000,64, "sha512").toString("hex");
+    return hash = hashVerify;
  }
-
-
-// module.exports.validPassword = validPassword;
-
-// module.exports.genPassword = genPassword; 
