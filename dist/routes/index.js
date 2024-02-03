@@ -38,10 +38,6 @@ exports.router.get("/signup", (req, res, next) => {
     const form = `<<h1>Register Page</h1><form method="POST" action="/signup">\ Enter Username:<br><input type="text" name="username">\ <br>Enter Password:<br><input type="password" name="password">\ <br><br><input type="submit" value="Submit"></form>`;
     res.send(form);
 });
-exports.router.get("/register", (req, res, next) => {
-    const form = `<<h1>Register Page</h1><form method="POST" action="/signup">\ Enter Username:<br><input type="text" name="username">\ <br>Enter Password:<br><input type="password" name="password">\ <br><br><input type="submit" value="Submit"></form>`;
-    res.send(form);
-});
 /**
  * Lookup how to authenticate users on routes with Local Strategy
  * Google Search: "How to use Express Passport Local Strategy"
