@@ -12,21 +12,38 @@ router.post("/signin",passport.authenticate("local"),(req:Request,res:Response,n
 
 });
 
-router.post("/signup",(req:Request,res:Response,next:NextFunction)=>{});
+router.post("/signup",(req:Request,res:Response,next:NextFunction)=>{
+  const saltHash = genPassword(req.body.pw);
+
+  const salt = saltHash.salt;
+  const hash = saltHash.hash;
+
+  const newUser = new User({
+    username:req.body.uname,
+    hash:hash,
+    salt:salt,
+  });
+
+  newUser.save().then((user)=>{
+    console.log(user)
+  });
+
+  res.redirect("/signin");
+});
 
 //  get route //
 
 router.get("/" , (req:Request, res:Response, next:NextFunction)=>{
-    res.send(`<h1>Home</h1><p>Please <a href="/signup">register</a></p>`)
+    res.send(`<h1>Home</h1><p>Please <a href="/signup">register</a></p>`);
 });
 
-router.get("/login" , (req:Request, res:Response, next:NextFunction)=>{
+router.get("/signin" , (req:Request, res:Response, next:NextFunction)=>{
     const form = `<<h1>Login Page</h1><form method="POST" action="/signin">\ Enter Username:<br><input type="text" name="username">\ <br>Enter Password:<br><input type="password" name="password">\ <br><br><input type="submit" value="Submit"></form>`
 
     res.send(form);
 });
 
-router.get("/register" , (req:Request, res:Response, next:NextFunction)=>{
+router.get("/signup" , (req:Request, res:Response, next:NextFunction)=>{
     const form = `<<h1>Register Page</h1><form method="POST" action="/signup">\ Enter Username:<br><input type="text" name="username">\ <br>Enter Password:<br><input type="password" name="password">\ <br><br><input type="submit" value="Submit"></form>`
 
     res.send(form);

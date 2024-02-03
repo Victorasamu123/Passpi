@@ -16,7 +16,6 @@ function genPassword(password) {
 exports.genPassword = genPassword;
 function validPassword(password, hash, salt) {
     let hashVerify = crypto_1.default.pbkdf2Sync(password, salt, 10000, 64, "sha512").toString("hex");
+    return hash = hashVerify;
 }
 exports.validPassword = validPassword;
-// module.exports.validPassword = validPassword;
-// module.exports.genPassword = genPassword;
