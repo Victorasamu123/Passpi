@@ -17,6 +17,7 @@ const crypto_1 = __importDefault(require("crypto"));
 function genPassword(password) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            console.log(password);
             let salt = crypto_1.default.randomBytes(32).toString("hex");
             let genHash = crypto_1.default.pbkdf2Sync(password, salt, 10000, 64, "sha512").toString("hex");
             return {

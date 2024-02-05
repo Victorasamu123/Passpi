@@ -12,8 +12,8 @@ router.post("/signin",passport.authenticate("local"),(req:Request,res:Response,n
 
 });
 
-router.post("/signup",(req:Request,res:Response,next:NextFunction)=>{
-  const saltHash = genPassword(req.body.pw);
+router.post("/signup",async (req:Request,res:Response,next:NextFunction)=>{
+  const saltHash = await genPassword(req.body.pw);
 
   const salt = saltHash.salt;
   const hash = saltHash.hash;
