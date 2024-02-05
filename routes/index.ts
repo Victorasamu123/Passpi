@@ -13,13 +13,14 @@ router.post("/signin",passport.authenticate("local"),(req:Request,res:Response,n
 });
 
 router.post("/signup",async (req:Request,res:Response,next:NextFunction)=>{
-  const saltHash = await genPassword(req.body.pw);
+  console.log(req.body);
+  const saltHash = await genPassword(req.body.password);
 
   const salt = saltHash.salt;
   const hash = saltHash.hash;
 
   const newUser = new User({
-    username:req.body.uname,
+    username:req.body.username,
     hash:hash,
     salt:salt,
   });

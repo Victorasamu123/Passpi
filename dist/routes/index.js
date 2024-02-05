@@ -22,11 +22,12 @@ exports.router = express_1.default.Router();
 exports.router.post("/signin", passport_1.default.authenticate("local"), (req, res, next) => {
 });
 exports.router.post("/signup", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const saltHash = yield (0, passwordUtils_1.genPassword)(req.body.pw);
+    console.log(req.body);
+    const saltHash = yield (0, passwordUtils_1.genPassword)(req.body.password);
     const salt = saltHash.salt;
     const hash = saltHash.hash;
     const newUser = new database_1.User({
-        username: req.body.uname,
+        username: req.body.username,
         hash: hash,
         salt: salt,
     });
