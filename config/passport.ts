@@ -16,7 +16,7 @@ const verifyCallBack = (username: string, password:string, done:any) => {
         if(!user){return done (null, false)}
 
         //function defined 
-        const isValid = validPassword(password, user.hash, user.salt) as unknown as boolean
+        const isValid = validPassword(password, user.hash as string, user.salt as string)
 
         if(isValid){
             return done(null, user);

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 require("dotenv").config();
 
@@ -12,7 +12,7 @@ interface Userss{
     salt:string
 }
 
-const UserSchema = new mongoose.Schema<Userss>({
+const UserSchema = new Schema({
     username:String,
     hash:String,
     salt:String
@@ -20,4 +20,4 @@ const UserSchema = new mongoose.Schema<Userss>({
 
 export const User =  mongoose.model("user",UserSchema);
 
-module.exports = User;
+// module.exports = User;
