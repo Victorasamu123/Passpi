@@ -19,7 +19,9 @@ const passwordUtils_1 = require("../lib/passwordUtils");
 const database_1 = require("../config/database");
 exports.router = express_1.default.Router();
 // post routess //
-exports.router.post("/signin", passport_1.default.authenticate("local", { failureRedirect: "/login-failure", successRedirect: "/login-success" }));
+exports.router.post("/signin", passport_1.default.authenticate("local", { failureRedirect: "/login-failure", successRedirect: "/login-success" }), (req, res, next) => {
+    console.log(passport_1.default.authenticate("local"));
+});
 exports.router.post("/signup", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
     const saltHash = yield (0, passwordUtils_1.genPassword)(req.body.password);

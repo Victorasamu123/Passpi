@@ -10,9 +10,8 @@ const customFields = {
 };
 
 const verifyCallBack = (username: string, password:string, done:any) => {
-    
     User.findOne({username:username}).then((user)=>{
-
+         
         if(!user){return done (null, false)}
 
         //function defined 
