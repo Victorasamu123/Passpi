@@ -7,10 +7,7 @@ export const router = express.Router();
 
 // post routess //
 
-router.post("/signin", passport.authenticate("local", {failureRedirect:"/login-failure", successRedirect:"/login-success"}),(req,res,next)=>{
-  console.log(passport.authenticate("local"))
-}
-);
+router.post("/signin", passport.authenticate("local", {failureRedirect:"/login-failure", successRedirect:"/login-success"}));
 
 router.post("/signup",async (req:Request,res:Response,next:NextFunction)=>{
   console.log(req.body);

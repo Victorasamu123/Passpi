@@ -5,8 +5,8 @@ import { validPassword,genPassword } from "../lib/passwordUtils";
 const LocalStrategy = localStrategy.Strategy;
 
 const customFields = {
-    usernameField : "uname",
-    passwordField:"pw"
+    usernameField : "username",
+    passwordField:"password"
 };
 
 const verifyCallBack = (username: string, password:string, done:any) => {
