@@ -74,12 +74,12 @@ router.get('/logout', (req:Request, res:Response, next:NextFunction) => {
         } else {
           req.session.destroy((err) => {
             if (err) {
-              console.error('Error destroying session:', err);
-              res.status(500).send('Error destroying session');
+              // console.error('Error destroying session:', err);
+              // res.status(500).send('Error destroying session');
             } else {
               res.redirect('/'); // Redirect to the homepage or login page
             }
-          }); 
+          });
         }
       });
     res.redirect('/protected-route');
@@ -92,10 +92,3 @@ router.get('/login-success', (req:Request, res:Response, next:NextFunction) => {
 router.get('/login-failure', (req, res, next) => {
     res.send('You entered the wrong password.');
 });
-
-
-
-
-
-
-  
