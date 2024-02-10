@@ -2,6 +2,7 @@ import express,{Request,Response,NextFunction} from "express";
 import passport from "passport";
 import { genPassword, validPassword } from "../lib/passwordUtils";
 import { User } from "../config/database";
+import { isAdmin, isAuth } from "./authMiddleWare";
 
 export const router = express.Router();
 
@@ -20,6 +21,7 @@ router.post("/signup",async (req:Request,res:Response,next:NextFunction)=>{
     username:req.body.username,
     hash:hash,
     salt:salt,
+    admin:true,
   });
 
   newUser.save().then((user)=>{
@@ -55,14 +57,11 @@ router.get("/signup" , (req:Request, res:Response, next:NextFunction)=>{
  */
 
 
-router.get('/protected-route', (req:Request, res:Response, next:NextFunction )=> {
-    
-    // This is how you check if a user is authenticated and protect a route.  You could turn this into a custom middleware to make it less redundant
-    if (req.isAuthenticated()) {
-        res.send('<h1>You are authenticated</h1><p><a href="/logout">Logout and reload</a></p>');
-    } else {
-        res.send('<h1>You are not authenticated</h1><p><a href="/login">Login</a></p>');
-    }
+router.get('/protected-route', isAuth,(req:Request, res:Response, next:NextFunction )=> {
+   res.send("you made it to the route");
+});
+router.get('/admin-route', isAdmin,(req:Request, res:Response, next:NextFunction )=> {
+   res.send("you made it to the admin route");
 });
 
 // Visiting this route logs the user out

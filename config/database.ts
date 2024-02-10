@@ -9,13 +9,15 @@ const connection = mongoose.connect(connect);
 interface Userss{
     username:string,
     hash:string,
-    salt:string
+    salt:string,
+   
 }
 
 const UserSchema = new Schema({
     username:String,
     hash:String,
-    salt:String
+    salt:String,
+    admin:Boolean,
 });
 
 export const User =  mongoose.model("user",UserSchema);

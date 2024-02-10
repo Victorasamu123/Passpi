@@ -31,7 +31,8 @@ const connection = mongoose_1.default.connect(connect);
 const UserSchema = new mongoose_1.Schema({
     username: String,
     hash: String,
-    salt: String
+    salt: String,
+    admin: Boolean,
 });
 exports.User = mongoose_1.default.model("user", UserSchema);
 // module.exports = User;
