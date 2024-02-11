@@ -15,7 +15,7 @@ const isAdmin = (req, res, next) => {
         next();
     }
     else {
-        res.status(401).json({ msg: "you are not authorised to use this resource" });
+        res.status(401).json({ msg: "you are not authorised to use this resource because you are not an admin" });
     }
 };
 exports.isAdmin = isAdmin;
