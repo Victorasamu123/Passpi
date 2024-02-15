@@ -2,10 +2,12 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.publicKey = exports.privateKey = void 0;
 const crypto_1 = __importDefault(require("crypto"));
 const fs_1 = __importDefault(require("fs"));
-const { privateKey, publicKey } = crypto_1.default.generateKeyPairSync('rsa', {
+_a = crypto_1.default.generateKeyPairSync('rsa', {
     modulusLength: 4096,
     publicKeyEncoding: {
         type: 'spki',
@@ -15,9 +17,9 @@ const { privateKey, publicKey } = crypto_1.default.generateKeyPairSync('rsa', {
         type: 'pkcs8',
         format: 'pem'
     }
-});
-fs_1.default.writeFileSync('privateKey.pem', privateKey);
-fs_1.default.writeFileSync('publicKey.pem', publicKey);
+}), exports.privateKey = _a.privateKey, exports.publicKey = _a.publicKey;
+fs_1.default.writeFileSync(__dirname + '/privateKey.pem', exports.privateKey);
+fs_1.default.writeFileSync(__dirname + '/publicKey.pem', exports.publicKey);
 console.log('Keys generated and saved successfully.');
 // export const genKeyPair=():void=>{
 //     const keyPair= crypto.generateKeyPairSync('x448',{

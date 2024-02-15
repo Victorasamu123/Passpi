@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import fs from "fs"
 
-const {privateKey, publicKey} = crypto.generateKeyPairSync('rsa',{
+export const {privateKey, publicKey} = crypto.generateKeyPairSync('rsa',{
    modulusLength:4096,
    publicKeyEncoding:{
     type:'spki',
