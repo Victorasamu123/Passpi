@@ -1,10 +1,5 @@
 import crypto from "crypto";
 import fs from "fs"
-import express , {Response} from "express";
-
-// const generateKeyPair():{publicKey:string ,privateKey: string}{
-//   const {privateKey, publicKey} = 
-// }
 
 const {privateKey, publicKey} = crypto.generateKeyPairSync('rsa',{
    modulusLength:4096,
@@ -18,9 +13,10 @@ const {privateKey, publicKey} = crypto.generateKeyPairSync('rsa',{
   }
 });
 
-fs.writeFileSync('privateKey.pem',privateKey);
-fs.writeFileSync('publicKey.pem',publicKey);
+fs.writeFileSync(__dirname + '/privateKey.pem',privateKey);
+fs.writeFileSync(__dirname + '/publicKey.pem',publicKey);
 
+console.log('Keys generated and saved successfully.');
 
 
 // export const genKeyPair=():void=>{
