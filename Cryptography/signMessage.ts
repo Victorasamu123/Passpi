@@ -16,4 +16,13 @@ const myDataString = JSON.stringify(myData);
 hash.update(myDataString);
 
 const hashedData = hash.digest('hex');
-3-22
+
+const senderPrivateKey = fs.readFileSync(__dirname + "/privateKey.pem", 'utf8');
+
+const signedMessage = encryptWithPrivateKey(senderPrivateKey,hashedData);
+
+export const packageOfDataToSend = {
+    algorithm:'sha256',
+    originalData:myData,
+    signedMessageEncryptData:signedMessage
+}
