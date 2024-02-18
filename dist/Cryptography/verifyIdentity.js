@@ -18,5 +18,5 @@ if (hashOfOriginalHex === decryptMessageHex) {
     console.log("Success! the data has not been tempered with and the sender is valid");
 }
 else {
-    console.log("Uh Oh... Someone is tring to manipulate the data or ....");
+    console.log("Uh Oh... Someone is tring to manipulate the data or someone else is a spying bastard");
 }
