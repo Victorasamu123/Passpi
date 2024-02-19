@@ -32,6 +32,7 @@ app.use((0, express_session_1.default)({
     },
 }));
 require("./config/passport");
+require('./config/passportJWT');
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
 app.use((req, res, next) => {

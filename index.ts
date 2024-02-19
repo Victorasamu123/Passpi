@@ -6,6 +6,10 @@ import passport from "passport"
 import crypto from "crypto"
 import MongoStore from "connect-mongo";
 import {router} from "./routes/index";
+import path from "path";
+import { UserAuth } from "./models/user.model";
+
+
 interface CustomSession extends session.Session{
     views?: number;
 };
@@ -48,6 +52,7 @@ app.use(session({
 }));
 
 require("./config/passport");
+require('./config/passportJWT');
 
 app.use(passport.initialize());
 app.use(passport.session());
