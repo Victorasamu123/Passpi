@@ -8,6 +8,8 @@ const passport_local_1 = __importDefault(require("passport-local"));
 const database_1 = require("./database");
 const passwordUtils_1 = require("../lib/passwordUtils");
 const LocalStrategy = passport_local_1.default.Strategy;
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 const customFields = {
     usernameField: "username",
     passwordField: "password"
@@ -31,6 +33,9 @@ const verifyCallBack = (username, password, done) => {
 };
 const Strategy = new LocalStrategy(customFields, verifyCallBack);
 passport_1.default.use(Strategy);
+const pathToKey = path_1.default.join(__dirname, '..', 'publicKey.pem');
+const PUB_KEY = fs_1.default.readFileSync(pathToKey, 'utf8');
+const options = {};
 passport_1.default.serializeUser((user, done) => {
     done(null, user);
 });

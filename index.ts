@@ -8,6 +8,7 @@ import MongoStore from "connect-mongo";
 import {router} from "./routes/index";
 import path from "path";
 import { UserAuth } from "./models/user.model";
+import { userRoute } from "./routes/users.route";
 
 
 interface CustomSession extends session.Session{
@@ -33,6 +34,12 @@ const PORT = process.env.PORT || 4500
 const MONGODB = process.env.MONGODB
 const SESSIONSECRET = process.env.SESSIONSECRET
 
+require("./config/passport");
+require('./config/passportJWT');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
@@ -51,11 +58,6 @@ app.use(session({
     },
 }));
 
-require("./config/passport");
-require('./config/passportJWT');
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use((req,res,next)=>{
     console.log(req.session);
@@ -64,7 +66,7 @@ app.use((req,res,next)=>{
 })
 
 app.use(router);
-
+app.use(userRoute);
 
 app.get("/", (req :Request<{session: SessionData}>,res:Response)=>{
     if(!req.session!.views){

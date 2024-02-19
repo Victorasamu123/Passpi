@@ -3,6 +3,10 @@ import localStrategy from "passport-local";
 import {User} from "./database"
 import { validPassword,genPassword } from "../lib/passwordUtils";
 const LocalStrategy = localStrategy.Strategy;
+import fs from "fs";
+import path from "path";
+import { UserAuth } from "../models/user.model";
+
 
 const customFields = {
     usernameField : "username",
@@ -32,6 +36,20 @@ const verifyCallBack = (username: string, password:string, done:any) => {
 const Strategy = new LocalStrategy(customFields, verifyCallBack);
 
 passport.use(Strategy);
+
+
+const pathToKey = path.join(__dirname, '..','publicKey.pem');
+const PUB_KEY = fs.readFileSync(pathToKey, 'utf8');
+
+const options = {};
+
+
+
+
+
+
+
+
 
 passport.serializeUser((user,done)=>{
     done(null, user);
