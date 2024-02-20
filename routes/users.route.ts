@@ -1,7 +1,6 @@
 import express,{Request,Response,NextFunction} from "express";
 import { UserAuth } from "../models/user.model";
 import passport from "passport";
-import { router } from ".";
 // import utils from "../lib/utils"
 
 export const userRoute = express.Router();
